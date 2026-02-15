@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  body { opacity: 1 !important; }
+  .page-fade, .fade-in-element { opacity: 1 !important; }
+</style>
+</head>
+<body class="page-fade">
+
+  <div class="navbar fade-in-element">
+    <div>Dashboard</div>
+    <div id="navbarLinks">
+      <a href="items.html">Gallery</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <section class="hero fade-in-element">
+    <div class="logo fade-in-element">
+      <img src="Lost&FoundLogo.PNG" alt="Lost & Found Logo" style="max-width: 150px;">
+    </div>
+    <div class="hero-content fade-in-element">
+      <h1>Lost & Found</h1>
+      <p>Lost something? Found something? We can help you!</p>
+      <div class="hero-buttons fade-in-element">
+        <button class="primary" onclick="location.href='report.html'">Report an Item</button>
+        <button id="browseItemsBtn" class="secondary">Browse Items</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="container fade-in-element">
+    <div class="stats fade-in-element">
+      <div class="stat-card fade-in-element">
+        <h2 id="recovered-count">0</h2>
+        <p>Items Recovered</p>
+      </div>
+      <div class="stat-card fade-in-element">
+        <h2 id="active-users">0</h2>
+        <p>Active Users</p>
+      </div>
+      <div class="stat-card fade-in-element">
+        <h2 id="success-rate">0%</h2>
+        <p>Success Rate</p>
+      </div>
+    </div>
+
+    <div class="how-it-works fade-in-element">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step fade-in-element">
+          <span>1. Report Items</span><br/>
+          Quickly report lost or found items with details.
+        </div>
+        <div class="step fade-in-element">
+          <span>2. Browse Gallery</span><br/>
+          Search through all reported items on campus.
+        </div>
+        <div class="step fade-in-element">
+          <span>3. Get Connected</span><br/>
+          Contact item owners via email to claim items.
+        </div>
+        <div class="step fade-in-element">
+          <span>4. Admin Verified</span><br/>
+          All posts are verified by Admin.
+        </div>
+      </div>
+    </div>
+
+    <div class="signup fade-in-element" id="signupSection">
+      <h3>Ready to Get Started?</h3>
+      <p>Join us today and help reunite lost items with their owners</p>
+      <button onclick="location.href='signup.html'">Sign Up Now</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
