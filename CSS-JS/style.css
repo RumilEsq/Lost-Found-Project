@@ -984,8 +984,8 @@ textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(5px);
   display: none;
   align-items: center;
   justify-content: center;
@@ -996,19 +996,105 @@ textarea {
   display: flex;
 }
 
-.proof-modal-box {
-  background: linear-gradient(135deg, #1b263b, #243b55);
-  padding: 30px;
-  border-radius: 16px;
-  color: #fff;
+.proof-modal-wrapper {
+  display: flex;
+  gap: 16px;
   width: 90%;
-  max-width: 440px;
+  max-width: 860px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: scaleIn 0.3s ease;
   z-index: 10003;
+}
+
+.proof-modal-card {
+  background: linear-gradient(135deg, #1b263b, #243b55);
+  padding: 28px;
+  border-radius: 16px;
+  color: #fff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.proof-info-card {
+  position: relative;
+}
+
+.proof-upload-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.proof-info-photo {
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #0f1c2d;
+}
+
+.proof-info-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.proof-no-photo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 13px;
+}
+
+.proof-info-row {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.proof-info-label {
+  color: #94a3b8;
+  min-width: 90px;
+  flex-shrink: 0;
+  font-size: 12px;
+  padding-top: 1px;
+}
+
+.proof-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 14px 0 10px;
+}
+
+.proof-info-section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .proof-modal-wrapper {
+    flex-direction: column;
+    max-height: 90vh;
+    overflow-y: auto;
+    top: 5%;
+    transform: translate(-50%, 0);
+  }
 }
 
 .proof-modal-box h3 {
