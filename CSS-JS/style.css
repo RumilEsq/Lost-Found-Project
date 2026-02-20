@@ -564,7 +564,7 @@ textarea {
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
-  background: #16a34a;
+  background: #2563eb;
   color: #fff;
   cursor: pointer;
   font-size: 14px;
@@ -572,7 +572,7 @@ textarea {
 }
 
 .found-it-btn:hover:not(:disabled) {
-  background: #15803d;
+  background: #1d4ed8;
 }
 
 .found-it-btn:disabled {
@@ -1142,12 +1142,23 @@ textarea {
 }
 
 .proof-submit-btn {
-  background: #22c55e;
-  color: #000;
+  background: #0672ee;
+  color: #000000;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.proof-submit-btn:hover {
+  background: #0077ff;
 }
 
 .proof-cancel-btn {
-  background: #f87171;
+  background:  #fff;
+  color: #130000;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.proof-cancel-btn:hover {
+  background: rgba(255,255,255,0.07);
   color: #fff;
 }
 
