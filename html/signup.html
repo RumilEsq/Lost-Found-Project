@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | Lost & Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS-JS/style.css">
+</head>
+<body style="min-height: 100vh; background: linear-gradient(135deg, #0b1220, #111827); display: flex; align-items: center; justify-content: center;">
+
+    <a href="Dashboard.html" class="back-btn" style="position: absolute; top: 20px; left: 20px; background: #1f2937; color: #fff; padding: 10px 16px; text-decoration: none;">&larr; Back to Home</a>
+
+    <div class="signup-card">
+        <div class="brand">
+            <h1>Lost & Found</h1>
+            <p>Helping students reconnect with their belongings</p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2>Create Account</h2>
+        </div>
+
+        <form id="signupForm">
+            <label>Full Name</label>
+            <input type="text" id="fullname" placeholder="John Doe" required>
+            <div class="error" id="nameError">Name is required</div>
+
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="@gmail.com" required>
+            <div class="error" id="emailError">Invalid email</div>
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Create a password (min. 6 characters)" minlength="6" required>
+            <div class="error" id="passwordError">Password must be at least 6 characters</div>
+
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+            <div class="error" id="confirmError">Passwords do not match</div>
+
+            <button class="signup-btn" type="submit" style="background: #000; margin-top: 28px;">Create Account</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <div id="loginSuccessModal" class="login-success-modal" style="display: none;">
+        <div class="login-success-box">
+            <h2>Account Created!</h2>
+            <p>You've successfully signed up.</p>
+            <div class="login-user-info">
+                <p><strong>Email:</strong> <span id="loginUserEmail"></span></p>
+                <p>Click continue to go to your dashboard.</p>
+            </div>
+            <button id="closeLoginSuccess">Continue</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../CSS-JS/config.js"></script>
+    <script src="../CSS-JS/login.js"></script>
+</body>
+</html>
