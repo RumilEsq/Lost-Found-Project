@@ -158,13 +158,37 @@ document.addEventListener("DOMContentLoaded", async () => {
           currentActionType = actionBtnEl.dataset.action;
           proofFile.value = "";
 
-          if (currentActionType === "claim") {
-            proofModalTitle.textContent = "Claim This Item";
-            proofModalDesc.textContent = "Please upload a photo as proof that this item belongs to you (e.g. photo with the item, receipt, or any identifying proof).";
+          const infoPhoto = document.getElementById("proofInfoPhoto");
+          const infoNoPhoto = document.getElementById("proofInfoNoPhoto");
+          if (report.photo_url) {
+            infoPhoto.src = report.photo_url;
+            infoPhoto.style.display = "block";
+            infoNoPhoto.style.display = "none";
           } else {
-            proofModalTitle.textContent = "I Found This Item";
-            proofModalDesc.textContent = "Please upload a photo as proof that you found this item so the owner can verify and contact you.";
+            infoPhoto.style.display = "none";
+            infoNoPhoto.style.display = "flex";
           }
+
+          document.getElementById("proofInfoName").textContent = report.item_name;
+          document.getElementById("proofInfoCategory").textContent = report.category;
+          document.getElementById("proofInfoLocation").textContent = report.location;
+          document.getElementById("proofInfoDate").textContent = report.date;
+          document.getElementById("proofInfoDescription").textContent = report.description || "No description provided";
+          document.getElementById("proofInfoReporterName").textContent = report.reporter_name;
+          document.getElementById("proofInfoEmail").textContent = report.reporter_email;
+
+          const fbEl = document.getElementById("proofInfoFacebook");
+          if (report.reporter_facebook) {
+            fbEl.innerHTML = `<a href="${report.reporter_facebook}" target="_blank" style="color:#60a5fa;">View Profile</a>`;
+          } else {
+            fbEl.textContent = "Not provided";
+          }
+
+          document.getElementById("proofModalTitle").textContent = "Item Details";
+          document.getElementById("proofUploadTitle").textContent = currentActionType === "claim" ? "Claim This Item" : "I Found This Item";
+          document.getElementById("proofModalDesc").textContent = currentActionType === "claim"
+            ? "Please upload a photo as proof that this item belongs to you (e.g. photo with the item, receipt, or any identifying proof)."
+            : "Please upload a photo as proof that you found this item so the owner can verify and contact you.";
 
           proofModal.classList.add("show");
         });
