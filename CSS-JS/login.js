@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const supabase = window.supabase.createClient(config.supabase.url, config.supabase.anonKey);
 
+  // ===== LOGIN FORM =====
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", async function (e) {
@@ -55,61 +56,86 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ===== SIGNUP FORM WITH STUDENT ID =====
   const signupForm = document.getElementById("signupForm");
   if (signupForm) {
     signupForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      const fullname = document.getElementById("fullname").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
+      try {
+        const fullname = document.getElementById("fullname").value.trim();
+        const studentInput = document.getElementById("studentID");
+        const studentID = studentInput ? studentInput.value.trim() : "";
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
 
-      if (!fullname || !email || !password || !confirmPassword) {
-        alert("All fields are required");
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullname
-          }
+        if (!fullname || !studentID || !email || !password || !confirmPassword) {
+          alert("All fields are required");
+          return;
         }
-      });
 
-      if (error) {
-        alert("Signup failed: " + error.message);
-        return;
-      }
+        if (password !== confirmPassword) {
+          alert("Passwords do not match");
+          return;
+        }
 
-      const loginCard = document.querySelector(".signup-card") || document.querySelector(".login-card");
-      const modal = document.getElementById("loginSuccessModal");
-      const userEmailSpan = document.getElementById("loginUserEmail");
+        // Validate Student ID format: CA + 9 digits
+        const studentIdPattern = /^CA\d{9}$/;
+        if (!studentIdPattern.test(studentID)) {
+          alert("Invalid Student ID format. Example: CA202410405");
+          return;
+        }
 
-      loginCard.style.animation = "fadeOut 0.5s forwards";
+        // Sign up with Supabase
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: fullname, student_id: studentID } }
+        });
 
-      setTimeout(() => {
-        modal.style.display = "flex";
-        userEmailSpan.textContent = email;
-        modal.querySelector(".login-success-box").classList.add("show");
-      }, 500);
+        if (error) {
+          alert("Signup failed: " + error.message);
+          return;
+        }
 
-      document.getElementById("closeLoginSuccess").onclick = () => {
-        loginCard.style.animation = "";
-        modal.querySelector(".login-success-box").classList.remove("show");
+        // Insert into students table
+        const { error: insertError } = await supabase.from("students").insert([
+          { full_name: fullname, email: email, student_id: studentID }
+        ]);
+
+        if (insertError) {
+          console.error("Failed to insert student into table:", insertError);
+          alert("Signup succeeded, but failed to save student info. Contact admin.");
+          return;
+        }
+
+        // Show success modal
+        const loginCard = document.querySelector(".signup-card");
+        const modal = document.getElementById("loginSuccessModal");
+        const userEmailSpan = document.getElementById("loginUserEmail");
+
+        loginCard.style.animation = "fadeOut 0.5s forwards";
+
         setTimeout(() => {
-          modal.style.display = "none";
-          window.location.href = "Dashboard.html";
-        }, 300);
-      };
+          modal.style.display = "flex";
+          userEmailSpan.textContent = email;
+          modal.querySelector(".login-success-box").classList.add("show");
+        }, 500);
+
+        document.getElementById("closeLoginSuccess").onclick = () => {
+          loginCard.style.animation = "";
+          modal.querySelector(".login-success-box").classList.remove("show");
+          setTimeout(() => {
+            modal.style.display = "none";
+            window.location.href = "Dashboard.html";
+          }, 300);
+        };
+
+      } catch (err) {
+        console.error("Signup JS error:", err);
+        alert("An unexpected error occurred. Check console.");
+      }
     });
   }
 });
