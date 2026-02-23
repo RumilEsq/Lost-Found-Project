@@ -23,19 +23,18 @@
         <form id="signupForm">
             <label>Full Name</label>
             <input type="text" id="fullname" placeholder="John Doe" required>
-            <div class="error" id="nameError">Name is required</div>
+
+            <label>Student ID Number</label>
+            <input type="text" id="studentID" placeholder="e.g., CA202410405" required>
 
             <label>Email Address</label>
             <input type="email" id="email" placeholder="@gmail.com" required>
-            <div class="error" id="emailError">Invalid email</div>
 
             <label>Password</label>
             <input type="password" id="password" placeholder="Create a password (min. 6 characters)" minlength="6" required>
-            <div class="error" id="passwordError">Password must be at least 6 characters</div>
 
             <label>Confirm Password</label>
             <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-            <div class="error" id="confirmError">Passwords do not match</div>
 
             <button class="signup-btn" type="submit" style="background: #000; margin-top: 28px;">Create Account</button>
         </form>
@@ -58,8 +57,11 @@
         </div>
     </div>
 
+    <!-- Supabase library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Your Supabase config -->
     <script src="../CSS-JS/config.js"></script>
+    <!-- Signup + login JS -->
     <script src="../CSS-JS/login.js"></script>
 </body>
 </html>
