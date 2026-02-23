@@ -1,4 +1,32 @@
 document.addEventListener("DOMContentLoaded", async () => {
+
+  // --- Inject claimed badge styles dynamically ---
+  const style = document.createElement("style");
+  style.textContent = `
+    .item-card.claimed {
+      position: relative;
+      opacity: 0.7;
+    }
+    .item-card.claimed::after {
+      content: "CLAIMED";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ef4444;
+      color: #fff;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      z-index: 10;
+    }
+    .item-card.claimed button {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  `;
+  document.head.appendChild(style);
+
   const itemsPage = document.getElementById("itemsPageContent");
   if (itemsPage) setTimeout(() => itemsPage.classList.add("show"), 50);
 
@@ -93,6 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const card = document.createElement("div");
       card.classList.add("item-card");
+      if (report.claimed) card.classList.add("claimed"); // <-- mark fully claimed
 
       let actionBtn = "";
 
